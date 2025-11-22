@@ -1,0 +1,25 @@
+.right-header-tab {
+    justify-content: right;
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.right-header-tab > button {
+    padding: 0.4rem 0.6rem;
+    margin-inline-start: 1rem;
+}
+
+#ui-btn {
+    border-radius: 50%;
+}
+
+#tab-btn {
+    border-radius: 5px;
+}
+
+#ui-btn:hover, #tab-btn:hover {
+    color: white;
+    background-color: black;
+    transition: 0.3s;
+}
