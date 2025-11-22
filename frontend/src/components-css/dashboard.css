@@ -1,0 +1,16 @@
+.expenses-container {
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.expenses-header, .expenses {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.actions-tab > button {
+    padding: 0.3rem 0.5rem;
+    border-radius: 10%;
+    margin-inline-start: 5px;
+}

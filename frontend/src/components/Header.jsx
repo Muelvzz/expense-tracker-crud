@@ -1,6 +1,7 @@
 import "../components-css/header.css"
+import Add from "./Add"
 
-export default function Header({ toggleDark, setToggleDark }) {
+export default function Header({ toggleDark, setToggleDark, toggleAdd, setToggleAdd }) {
     return (
         <>
             <div className="right-header-tab">
@@ -10,7 +11,10 @@ export default function Header({ toggleDark, setToggleDark }) {
                 >
                     { toggleDark ? "🔆" : "🌙" }
                 </button>
-                <button id="tab-btn">Add</button>
+                <button 
+                    id="tab-btn"
+                    onClick={() => {setToggleAdd(true)}}
+                >Add</button>
             </div>
 
             <hr />
@@ -19,6 +23,14 @@ export default function Header({ toggleDark, setToggleDark }) {
                 <button id="tab-btn">Sort by</button>
                 <button id="tab-btn">Filter by</button>
             </div>
+
+            {
+                toggleAdd && (
+                    <Add 
+                        setToggleAdd={setToggleAdd}
+                    />
+                )
+            }
         </>
     )
 }

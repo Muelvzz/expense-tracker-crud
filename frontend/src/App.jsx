@@ -7,6 +7,8 @@ import Dashboard from './components/Dashboard'
 function App() {
 
   const [toggleDark, setToggleDark] = useState(false)
+  const [toggleAdd, setToggleAdd] = useState(false)
+  const [toggleUpdate, setToggleUpdate] = useState(false)
 
   useEffect(() => {
     if (toggleDark) {
@@ -16,17 +18,20 @@ function App() {
     }
   }, [toggleDark])
 
-  console.log(toggleDark)
-
   return (
     <div className="app-container">
 
       <Header 
         toggleDark={toggleDark}
         setToggleDark={setToggleDark}
+        toggleAdd={toggleAdd}
+        setToggleAdd={setToggleAdd}
       />
 
-      <Dashboard />
+      <Dashboard 
+        toggleUpdate={toggleUpdate}
+        setToggleUpdate={setToggleUpdate}
+      />
 
     </div>
   )
