@@ -4,11 +4,15 @@ import './App.css'
 import Header from './components/Header'
 import Dashboard from './components/Dashboard'
 
+import api from './api'
+
 function App() {
 
   const [toggleDark, setToggleDark] = useState(false)
   const [toggleAdd, setToggleAdd] = useState(false)
   const [toggleUpdate, setToggleUpdate] = useState(false)
+
+  const [expenses, setExpenses] = useState([])
 
   useEffect(() => {
     if (toggleDark) {
@@ -17,6 +21,15 @@ function App() {
       document.body.classList.remove("dark")
     }
   }, [toggleDark])
+
+  async function loadExpenses() {
+    const res = await api.get("/expense")
+    setExpenses(res.data)
+  }
+
+  useEffect(() => {
+    loadExpenses()
+  }, [])
 
   return (
     <div className="app-container">
@@ -31,6 +44,7 @@ function App() {
       <Dashboard 
         toggleUpdate={toggleUpdate}
         setToggleUpdate={setToggleUpdate}
+        expenses={expenses}
       />
 
     </div>

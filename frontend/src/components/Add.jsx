@@ -1,5 +1,6 @@
 import "../components-css/add.css"
 import { useState } from "react";
+import api from "../api";
 
 export default function Add({ setToggleAdd }) {
 
@@ -24,6 +25,10 @@ export default function Add({ setToggleAdd }) {
         setDescription(e.target.value)
     }
 
+    async function addExpense(expense) {
+        const res = await api.post("/expense/add", expense)
+    }
+
     const handleSubmit = (e) => {
         const expense = {
             date: date,
@@ -31,7 +36,13 @@ export default function Add({ setToggleAdd }) {
             amount: amount,
             description: description,
         }
-        console.log(expense)
+        
+        addExpense(expense)
+
+        setDate("")
+        setCategory("")
+        setAmount("")
+        setDescription("")
     }
 
     return (

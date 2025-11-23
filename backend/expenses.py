@@ -26,7 +26,7 @@ def view_expense(db: Session = Depends(get_db)):
     
 
 @router.post("/add", response_model=ExpenseOut)
-def add_expense(expense = ExpenseCreate, db: Session = Depends(get_db)):
+def add_expense(expense: ExpenseCreate, db: Session = Depends(get_db)):
     try:
         expense_data = models.Expenses(
             date = expense.date,
