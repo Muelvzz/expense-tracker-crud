@@ -39,7 +39,7 @@
     border-radius: 6px;
 }
 
-.add-expense-form {
+.expense-form {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

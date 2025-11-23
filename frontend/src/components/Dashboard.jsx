@@ -1,6 +1,13 @@
 import "../components-css/dashboard.css"
+import Update from "./Update"
 
-export default function Dashboard({ toggleUpdate, setToggleUpdate, expenses }) {
+export default function Dashboard({ 
+    toggleUpdate,
+    setToggleUpdate,
+    expenses,
+    selectedExpense,
+    setSelectedExpense
+}) {
     return (
         <>
             <div className="expenses-container">
@@ -30,6 +37,7 @@ export default function Dashboard({ toggleUpdate, setToggleUpdate, expenses }) {
                                     <div className="actions-tab">
                                         <button 
                                             style={{backgroundColor: "yellow"}}
+                                            onClick={() => {setSelectedExpense(expense), setToggleUpdate(true)}}
                                         >✏️</button>
                                         <button
                                             style={{backgroundColor: "red"}}
@@ -39,6 +47,21 @@ export default function Dashboard({ toggleUpdate, setToggleUpdate, expenses }) {
                             ))
                         }
                 </div>
+
+                {
+                    toggleUpdate && (
+                        <Update 
+                            setToggleUpdate={setToggleUpdate}
+                            setSelectedExpense={setSelectedExpense}
+                            id={selectedExpense.id}
+                            updateDate={selectedExpense.date}
+                            updateCategory={selectedExpense.category}
+                            updateAmount={selectedExpense.amount}
+                            updateDescription={selectedExpense.description}
+                        />
+                    )
+                }
+
             </div>
         </>
     )

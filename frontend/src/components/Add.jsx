@@ -1,4 +1,4 @@
-import "../components-css/add.css"
+import "../components-css/add-update.css"
 import { useState } from "react";
 import api from "../api";
 
@@ -50,7 +50,7 @@ export default function Add({ setToggleAdd }) {
             <div className="modal-box" onClick={(e) => e.stopPropagation()}>
                 <h2 style={{color:"black"}}>Add Expense</h2>
 
-                <form className="add-expense-form" onSubmit={handleSubmit}>
+                <form className="expense-form" onSubmit={handleSubmit}>
 
                     <div className="left-form-card">
                         <input 
@@ -60,13 +60,18 @@ export default function Add({ setToggleAdd }) {
                             value={date}
                             onChange={handleDate}
                         />
-                        <input 
-                            type="text" 
-                            placeholder="Category" 
+                        <select 
+                            name="Category" 
                             required
                             value={category}
                             onChange={handleCategory} 
-                        />
+                        >
+                            <option value="">Select Category</option>
+                            <option value="Essentials">Essentials</option>
+                            <option value="Growth">Growth</option>
+                            <option value="Rewards">Rewards</option>
+                            <option value="Stability">Stability</option>
+                        </select>
                     </div>
 
                     <div className="right-form-card">

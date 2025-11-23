@@ -14,6 +14,8 @@ function App() {
 
   const [expenses, setExpenses] = useState([])
 
+  const [selectedExpense, setSelectedExpense] = useState(null)
+
   useEffect(() => {
     if (toggleDark) {
       document.body.classList.add("dark")
@@ -29,7 +31,7 @@ function App() {
 
   useEffect(() => {
     loadExpenses()
-  }, [])
+  }, [selectedExpense])
 
   return (
     <div className="app-container">
@@ -45,6 +47,8 @@ function App() {
         toggleUpdate={toggleUpdate}
         setToggleUpdate={setToggleUpdate}
         expenses={expenses}
+        selectedExpense={selectedExpense}
+        setSelectedExpense={setSelectedExpense}
       />
 
     </div>

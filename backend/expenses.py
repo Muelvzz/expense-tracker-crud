@@ -43,3 +43,25 @@ def add_expense(expense: ExpenseCreate, db: Session = Depends(get_db)):
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.put("/update/{id}", response_model=ExpenseOut)
+def update_expense(id: int, expense: ExpenseCreate, db: Session = Depends(get_db)):
+    try:
+        expense_data = db.query(models.Expenses).filter(models.Expenses.id == id).first()
+
+        if not expense_data:
+            raise HTTPException(status_code=404, detail="Item not found")
+        
+        expense_data.date = expense.date
+        expense_data.category = expense.category
+        expense_data.amount = expense.amount
+        expense_data.description = expense.description
+
+        db.commit()
+        db.refresh(expense_data)
+
+        return expense_data
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
