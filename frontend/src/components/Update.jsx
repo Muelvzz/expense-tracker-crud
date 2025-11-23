@@ -9,7 +9,9 @@ export default function Add({
     updateDate,
     updateCategory,
     updateAmount,
-    updateDescription
+    updateDescription,
+    refresh,
+    setRefresh
  }) {
 
     const [date, setDate] = useState(updateDate)
@@ -35,6 +37,7 @@ export default function Add({
 
     async function updateExpense(id, expense) {
         const res = await api.put(`/expense/update/${id}`, expense)
+        setRefresh(prev => !prev)
     }
 
     const handleSubmit = (e) => {

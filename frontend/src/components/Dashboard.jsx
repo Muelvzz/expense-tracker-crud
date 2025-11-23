@@ -1,13 +1,32 @@
 import "../components-css/dashboard.css"
 import Update from "./Update"
+import api from "../api"
+import { useState, useEffect } from "react"
 
 export default function Dashboard({ 
     toggleUpdate,
     setToggleUpdate,
     expenses,
     selectedExpense,
-    setSelectedExpense
+    setSelectedExpense,
+    refresh,
+    setRefresh
 }) {
+
+    const [toggleDelete, setToggleDelete] = useState(false)
+    const [deleteId, setDeleteId] = useState(0)
+
+    async function deleteExpense(id) {
+        const res = await api.delete(`/expense/delete/${id}`, id)
+        setRefresh(prev => !prev)
+    }
+
+    if (deleteId !== 0 && toggleDelete) {
+        deleteExpense(deleteId)
+        setDeleteId(0)
+        setToggleDelete(false)
+    }
+
     return (
         <>
             <div className="expenses-container">
@@ -41,6 +60,7 @@ export default function Dashboard({
                                         >✏️</button>
                                         <button
                                             style={{backgroundColor: "red"}}
+                                            onClick={() => {setToggleDelete(true), setDeleteId(expense.id)}}
                                         >❌</button>
                                     </div>
                                 </div>
@@ -58,6 +78,8 @@ export default function Dashboard({
                             updateCategory={selectedExpense.category}
                             updateAmount={selectedExpense.amount}
                             updateDescription={selectedExpense.description}
+                            refresh={refresh}
+                            setRefresh={setRefresh}
                         />
                     )
                 }

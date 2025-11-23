@@ -65,3 +65,20 @@ def update_expense(id: int, expense: ExpenseCreate, db: Session = Depends(get_db
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.delete("/delete/{id}", response_model=ExpenseOut)
+def delete_expense(id: int, db: Session = Depends(get_db)):
+    try:
+        expense_data = db.query(models.Expenses).filter(models.Expenses.id == id).first()
+
+        if not expense_data:
+            raise HTTPException(status_code=404, detail="Item not found")
+
+        db.delete(expense_data)
+        db.commit()
+
+        return expense_data
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
